@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Time Sub Layout -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/time_sub_layout"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/rectangle">
+
+        <TextClock
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:format12Hour="hh:mm"
+            android:format24Hour="HH:mm"></TextClock>
+
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/date"
+            android:layout_below="@+id/time"
+            android:textSize="20dp"
+            android:format12Hour="yyyy/MM/dd E"
+            android:format24Hour="yyyy/MM/dd E"></TextClock>
+
+    </RelativeLayout>
+
+    <!-- 天气预报子布局 -->
+    <RelativeLayout
+        android:id="@+id/weather_sub_layout"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time_sub_layout"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/rectangle">
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@+id/weather_location"
+            android:paddingBottom="5dp"
+            android:id="@+id/location_icon"
+            android:src="@drawable/location_icon"/>
+        <TextView
+            android:id="@+id/weather_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/location_icon"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="15dp"
+            android:text="Location"
+            android:textSize="20dp"/>
+        <LinearLayout
+            android:id="@+id/weather_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/weather_location"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                ></ImageView>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
