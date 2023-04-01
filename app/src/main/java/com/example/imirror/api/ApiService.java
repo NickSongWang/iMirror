@@ -2,6 +2,7 @@ package com.example.imirror.api;
 
 import static com.example.imirror.Constant.API_KEY;
 
+import com.example.imirror.bean.DailyResponse;
 import com.example.imirror.bean.NowResponse;
 import com.example.imirror.bean.SearchCityResponse;
 
@@ -28,4 +29,13 @@ public interface ApiService {
      */
     @GET("/v7/weather/now?key=" + API_KEY)
     Observable<NowResponse> nowWeather(@Query("location") String location);
+
+    /**
+     * 天气预报  (免费订阅)最多可以获得3天的数据
+     *
+     * @param location 城市id
+     * @return 返回天气预报数据 DailyResponse
+     */
+    @GET("/v7/weather/3d?key=" + API_KEY)
+    Observable<DailyResponse> dailyWeather(@Query("location") String location);
 }

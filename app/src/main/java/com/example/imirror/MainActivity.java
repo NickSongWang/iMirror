@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
 import android.app.Application;
@@ -17,16 +18,20 @@ import android.app.ActionBar;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.example.imirror.bean.DailyResponse;
 import com.example.imirror.bean.NowResponse;
 import com.example.imirror.bean.SearchCityResponse;
 import com.example.imirror.databinding.ActivityMainBinding;
 import com.example.imirror.databinding.ImirrorMainLayoutBinding;
 import com.example.imirror.location.LocationCallback;
 import com.example.imirror.location.MyLocationListener;
+import com.example.imirror.repository.adapter.DailyAdapter;
+import com.example.imirror.utils.WeatherUtil;
 import com.example.imirror.viewmodel.MainViewModel;
 import com.example.library.base.NetworkActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,6 +47,9 @@ public class MainActivity extends NetworkActivity<ImirrorMainLayoutBinding> impl
     private final MyLocationListener myListener = new MyLocationListener();
 
     private MainViewModel viewModel;
+
+    private final List<DailyResponse.DailyBean> dailyBeanList = new ArrayList<>();
+    private final DailyAdapter dailyAdapter = new DailyAdapter(dailyBeanList);
 
     /**
      * 注册意图
@@ -81,6 +89,8 @@ public class MainActivity extends NetworkActivity<ImirrorMainLayoutBinding> impl
     }
 
 
+
+
     /**
      * 数据观察
      */
@@ -97,6 +107,8 @@ public class MainActivity extends NetworkActivity<ImirrorMainLayoutBinding> impl
                     if (id != null) {
                         //通过城市ID查询城市实时天气
                         viewModel.nowWeather(id);
+                        //通过城市ID查询天气预报
+                        viewModel.dailyWeather(id);
                     }
                 }
             });
@@ -105,6 +117,20 @@ public class MainActivity extends NetworkActivity<ImirrorMainLayoutBinding> impl
                 NowResponse.NowBean now = nowResponse.getNow();
                 if (now != null) {
                     binding.weatherTemp.setText(now.getTemp());
+                }
+            });
+            //天气预报返回
+            viewModel.dailyResponseMutableLiveData.observe(this, dailyResponse -> {
+                List<DailyResponse.DailyBean> daily = dailyResponse.getDaily();
+                if (daily != null) {
+                    binding.weatherLowtemp.setText(daily.get(0).getTempMin());
+                    binding.weatherHightemp.setText(daily.get(0).getTempMax());
+                    WeatherUtil.changeIcon(binding.weatherStatus, Integer.parseInt(daily.get(0).getIconDay()));
+//                    if (dailyBeanList.size() > 0) {
+//                        dailyBeanList.clear();
+//                    }
+//                    dailyBeanList.addAll(daily);
+//                    dailyAdapter.notifyDataSetChanged();
                 }
             });
             //错误信息返回

@@ -2,6 +2,7 @@ package com.example.imirror.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.imirror.bean.DailyResponse;
 import com.example.imirror.bean.NowResponse;
 import com.example.imirror.bean.SearchCityResponse;
 import com.example.imirror.repository.SearchCityRepository;
@@ -13,6 +14,8 @@ public class MainViewModel extends BaseViewModel {
     public MutableLiveData<SearchCityResponse> searchCityResponseMutableLiveData = new MutableLiveData<>();
 
     public MutableLiveData<NowResponse> nowResponseMutableLiveData = new MutableLiveData<>();
+
+    public MutableLiveData<DailyResponse> dailyResponseMutableLiveData = new MutableLiveData<>();
 
     /**
      * 搜索城市
@@ -28,7 +31,16 @@ public class MainViewModel extends BaseViewModel {
      * @param cityId 城市ID
      */
     public void nowWeather(String cityId) {
-        new WeatherRepository().nowWeather(nowResponseMutableLiveData,failed, cityId);
+        WeatherRepository.getInstance().nowWeather(nowResponseMutableLiveData,failed, cityId);
+    }
+
+    /**
+     * 天气预报
+     *
+     * @param cityId 城市ID
+     */
+    public void dailyWeather(String cityId) {
+        WeatherRepository.getInstance().dailyWeather(dailyResponseMutableLiveData, failed, cityId);
     }
 }
 

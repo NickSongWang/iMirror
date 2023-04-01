@@ -76,14 +76,34 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp">
+            <ImageView
+                android:id="@+id/weather_status"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/icon_100"
+                />
+            <TextView
+                android:id="@+id/weather_lowtemp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text="0"
+                android:textSize="22dp"
+                ></TextView>
             <TextView
                 android:id="@+id/weather_temp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:text="0"
                 android:textSize="22dp"
-
                 ></TextView>
+            <TextView
+                android:id="@+id/weather_hightemp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text="0"
+                android:textSize="22dp"
+                ></TextView>
+
         </LinearLayout>
     </RelativeLayout>
 
