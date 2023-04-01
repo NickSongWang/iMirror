@@ -2,6 +2,7 @@ package com.example.imirror.api;
 
 import static com.example.imirror.Constant.API_KEY;
 
+import com.example.imirror.bean.NowResponse;
 import com.example.imirror.bean.SearchCityResponse;
 
 import io.reactivex.Observable;
@@ -18,4 +19,13 @@ public interface ApiService {
      */
     @GET("/v2/city/lookup?key=" + API_KEY + "&range=cn")
     Observable<SearchCityResponse> searchCity(@Query("location") String location);
+
+    /**
+     * 实况天气
+     *
+     * @param location 城市ID
+     * @return 返回实况天气数据 NowResponse
+     */
+    @GET("/v7/weather/now?key=" + API_KEY)
+    Observable<NowResponse> nowWeather(@Query("location") String location);
 }

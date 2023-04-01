@@ -1,5 +1,6 @@
 package com.example.library.network;
 
 public enum ApiType {
-    SEARCH
+    SEARCH,     //和风 城市搜索
+    WEATHER,    //和风 天气接口
 }
