@@ -7,7 +7,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.imirror.Constant;
-import com.example.imirror.ApiService;
+import com.example.imirror.api.ApiService;
 import com.example.imirror.bean.SearchCityResponse;
 import com.example.library.network.ApiType;
 import com.example.library.network.NetworkApi;
